@@ -1,0 +1,55 @@
+{% extends 'home/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="thumbnail-detail" xmlns:blog="http://www.w3.org/1999/xhtml" xmlns:blog="http://www.w3.org/1999/xhtml">
+    <h3>{{ object.title }}</h3>
+    <span class="badge badge-success"><a href="{% url 'home:post_list_user' object.author.username %}" style="color: white; ">{{ object.author }}</a></span></span>
+    <span class="badge badge-secondary">{{ object.created }}</span>
+    <span class="badge badge-secondary">{{ object.category }}</span>
+    {% if request.user == object.author %}
+    <button type="button" class="btn btn-outline-secondary btn-sm" onClick="location.href='{% url 'home:post_delete' object.pk %}'">Delete</button>
+    <button type="button" class="btn btn-outline-secondary btn-sm" onClick="location.href='{{ object.get_post_update_url }}'">Edit</button>
+    {% endif %}
+    <p></p>
+    <img class="img-thumbnail" style="padding: 10px" src="{{ object.image.url }}" width="1000px" height="100%" alt="...">
+    <div style="padding-top: 20px; " />
+    <div class="caption">
+        <p>{{ object.content }}</p>
+        <br />
+        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="location.href='{% url 'home:post_like' object.pk %}'">
+            <i class="fas fa-splotch"></i><span class="badge badge-secondary">like ({{ object.like_count }})</span></button>
+    </div>
+</div>
+<br />
+<br />
+<hr />
+<div class="container">
+    <form method="POST" action="{% url 'home:comment_create' object.pk %}">{% csrf_token %}
+        <div class="form-group">
+            <label>Comments</label>
+            {{ comment_form | crispy }}
+            <button type="submit" class="btn btn-outline-primary btn-sm">Submit</button>
+        </div>
+    </form>
+</div>
+<br />
+<br />
+<div class="container">
+    <div id="comment-list" style="border: 1px solid #A4A4A4; margin-bottom: 20px; ">
+        {% for comment in object.comment_set.all %}
+        <div class="media mb-4" id="comment-id-{{ comment.pk }}">
+            <div class="media-body container">
+                <span class="badge badge-success"><a href="{% url 'home:post_list_user' comment.author %}" style="color: white;">{{ comment.author }}</a></span><span class="badge badge-secondary">{{ comment.modified_at }}</span>
+                <p>{{ comment.get_markdown_content | safe }}</p>
+                {% if request.user == comment.author %}
+                <span class="badge badge-pill badge-primary"><a style="color: white;" href="{% url 'home:comment_update' comment.pk %}">Modify</a></span>
+                <span class="badge badge-pill badge-primary"><a style="color: white;" href="{% url 'home:comment_delete' comment.pk %}">Delete</a></span>
+                {% endif %}
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

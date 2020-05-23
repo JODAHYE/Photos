@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>사진첩</title>
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'home/css/custom.min.css' %}">
+    <script src="https://kit.fontawesome.com/b962c21d10.js" crossorigin="anonymous"></script>
+</head>
+<style>
+  body { padding-top: 107px; }
+  .list { padding-right: 20px; padding-left: 20px; }
+  .thumbnail-detail { padding-top: 40px; text-align: center; }
+  .caption { padding-top: 10px; margin-bottom: 10px; }
+</style>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="padding: 0.5rem 1rem; ">
+    <a class="navbar-brand" href="/">사진첩</a>
+    <div class="collapse navbar-collapse container" id="navbarColor03">
+        <ul class="navbar-nav mr-auto">
+            <a href="{% url 'allpictures:list' %}">모아보기<i class="fas fa-image"></i></a>
+        </ul>
+        <div class="btn-group" style="margin-right:5px"; >
+            <a href="{% url 'home:post_create' %}">Write<i class="fas fa-pen"></i></a>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                Category <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">All<span class="sr-only">(current)</span></a>
+                </li>
+                {% for category in category_list %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home:post_list_category' category.slug %}">{{ category.name }}({{ category.post_set.count }})</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <!-- Single button -->
+        <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                Menu <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="{% url 'home:about_page' %}">About</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'home:post_create' %}">Write</a></li>
+                <li><a href="{% url 'home:my_post_list' %}">My Posts</a></li>
+                <li><a href="{% url 'home:my_comment_list' %}">My Comments </a></li>
+                <li><a href="/accounts/logout/">Logout</a></li>
+                {% else %}
+                <li><a href="/accounts/login/">Login</a></li>
+                <li><a href="/accounts/signup/">Sign up</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+{% block content %}{% endblock %}
+
+<script src="{% static 'home/js/jquery.min.js' %}"></script>
+<script src="{% static 'home/js/popper.min.js' %}"></script>
+<script src="{% static 'home/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'home/js/custom.js' %}"></script>
+
+
+</body>
+</html>

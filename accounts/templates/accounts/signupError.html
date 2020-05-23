@@ -1,0 +1,8 @@
+{% extends 'home/base.html' %}
+{% block content %}
+<div style="text-align:center;">
+  <p>This name is already exists. Please enter another unique name.</p>
+  <button type="button" class="btn btn-outline-secondary" onClick="location.href='{% url 'accounts:signup' %}'">Back</button>
+</div>
+
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends 'home/base.html' %}
+{% block content %}
+<div align="center">
+    <p>Login is required</p>
+    <button type="button" class="btn btn-outline-secondary btn-sm" onClick="location.href='/'">Home</button>
+    <button type="button" class="btn btn-outline-secondary btn-sm" onClick="location.href='{% url 'accounts:login' %}'">Login</button>
+</div>
+{% endblock %}
