@@ -25,7 +25,7 @@ SECRET_KEY = '@btx#c-ji&9bk92h_px(%bs)xjse#a8b#rs#g%oze8g(n$6ujt'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['141.164.46.124', '127.0.0.1', 'ourphotos.site', 'www.ourphotos.site']
 
 
 # Application definition
