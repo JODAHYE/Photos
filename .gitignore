@@ -4,7 +4,5 @@ venv
 *.pyc
 
 db.sqlite3
-
-migrations/
 _media/
 
