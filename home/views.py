@@ -74,7 +74,7 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         post = super(PostUpdate, self).get_object()
         if post.author != self.request.user:
-            raise PermissionError('Post 수정 권한이 없습니다.')
+            return redirect('/')
         return post
 
 
@@ -101,7 +101,7 @@ class PostDelete(LoginRequiredMixin, DeleteView):
     def get_object(self, queryset=None):
         post = super(PostDelete, self).get_object()
         if post.author != self.request.user:
-            raise PermissionError('Post 삭제 권한이 없습니다.')
+            return redirect('/')
         return post
 
 
@@ -151,7 +151,7 @@ class CommentUpdate(UpdateView):
     def get_object(self, queryset=None):
         comment = super(CommentUpdate, self).get_object()
         if comment.author != self.request.user:
-            raise PermissionError('Comment 수정 권한이 없습니다.')
+            return redirect('/')
         return comment
 
 
