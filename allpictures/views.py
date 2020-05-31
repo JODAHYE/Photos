@@ -28,5 +28,6 @@ def my_picture_list(request):
         paginator = Paginator(object_list, 24)
         objects = paginator.get_page(page)
         return render(request, 'allpictures/my_picture_list.html', context={"objects": objects})
-
+    else:
+        return render(request, 'accounts/login.html')
 
