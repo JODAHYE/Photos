@@ -20,4 +20,5 @@ from allpictures import views
 app_name = 'allpictures'
 urlpatterns = [
     path('', views.picture_list, name='list'),
+    path('my_picture', views.my_picture_list, name="my_picture_list"),
 ]
