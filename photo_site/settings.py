@@ -39,9 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
     'accounts.apps.AccountsConfig',
+    'multiphoto.apps.MultiphotoConfig',
     'allpictures.apps.AllpicturesConfig',
     'markdownx',
     'crispy_forms',
+    'imagekit',
+
 ]
 
 MIDDLEWARE = [

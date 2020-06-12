@@ -14,38 +14,21 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="padding: 0.5rem ">
     <div>
-        <a class="navbar-brand" href="/">사진첩</a>
-        <a href="{% url 'allpictures:list' %}">모아보기<i class="fas fa-image"></i></a>
-        <a href="{% url 'multiphoto:index' %}" class="text-success" style="float: right;">Multi</a>
+        <a class="navbar-brand title" href="{% url 'multiphoto:index' %}">multi</a>
+        <a style="margin-right: 20px; " href="{% url 'multiphoto:multi_about' %}">ABOUT</a>
+        <a href="{% url 'home:index' %}" class="text-success" style="float: right;">HOME</a>
         <div class="collapse navbar-collapse container" id="navbarColor03">
             <div class="btn-group">
-                <a href="{% url 'home:post_create' %}">Write<i class="fas fa-pen"></i></a>
+                <a href="{% url 'multiphoto:multi_create' %}">Write<i class="fas fa-pen"></i></a>
             </div>
-            <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    Category <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/">All<span class="sr-only">(current)</span></a>
-                    </li>
-                    {% for category in category_list %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home:post_list_category' category.slug %}">{{ category.name }}({{ category.post_set.count }})</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <!-- Single button -->
             <div class="btn-group">
                 {% if user.is_authenticated %}
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     <i class="fas fa-heart"></i>  My<span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="{% url 'home:my_post_list' %}">My Posts</a></li>
-                    <li><a href="{% url 'allpictures:my_picture_list' %}">My Photos</a></li>
-                    <li><a href="{% url 'home:my_comment_list' %}">My Comments </a></li>
+                    <li><a href="{% url 'multiphoto:my_multi_list' %}">My Multi Posts</a></li>
+                    <li><a href="{% url 'multiphoto:my_multi_comment_list' %}">My Comments </a></li>
                     <li><a href="/accounts/logout/">Logout</a></li>
                 </ul>
                 {% else %}

@@ -1,0 +1,65 @@
+{% extends 'multiphoto/base.html' %}
+{% block content %}
+<div class="row container" style="width: 100%">
+    {% if object_list %}
+    {% for p in object_list %}
+    <div class="list col-md-6" style="margin: 0 auto;">
+        <div>
+            <span class="badge badge-secondary">{{ p.created }}</span>
+            <div class="row">
+                {% for image in p.image_set.all %}
+                {% if forloop.counter <= 3 %}
+                <div class="col-4 img-thumbnail">
+                    <div>
+                        <img src={{ image.file.url }} width="100%" height="100%" alt="...">
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="caption">
+            <h4><a href="{% url 'multiphoto:multi_detail' p.pk %}" style="text-decoration: none;">{{ p.title }}</a></h4>
+            {% if p.like_users.count >= 1 %}
+            <p><i class="fas fa-splotch primary float-right">({{ p.like_users.count }})</i></p>
+            {% endif %}
+            <span class="badge badge-pill badge-secondary">author:</span>
+            <span class="badge badge-success"><a href="{% url 'multiphoto:multi_list_user' p.author.username %}" style="color: white; ">{{ p.author }}</a></span>
+            <p>{{ p.content | truncatewords:20 }}</p>
+            <a href="{% url 'multiphoto:multi_detail' p.pk %}"><span class="label label-success">detail<i class="fas fa-angle-right"></i></span></a>
+        </div>
+        <hr width="200px;"/>
+    </div>
+    <br/>
+</div>
+{% endfor %}
+{% else %}
+<h1 class="container">No Post</h1>
+{% endif %}
+</div>
+{% if is_paginated %}
+<div >
+    <ul class="pagination pagination-sm">
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">< Older</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" href="#">< Older</a>
+        </li>
+        {% endif %}
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Latest ></a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" href="#">Latest ></a>
+        </li>
+        {% endif %}
+    </ul>
+</div>
+{% endif %}
+
+{% endblock %}

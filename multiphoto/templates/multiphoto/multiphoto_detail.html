@@ -1,0 +1,75 @@
+{% extends 'multiphoto/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="thumbnail-detail" xmlns:blog="http://www.w3.org/1999/xhtml" xmlns:blog="http://www.w3.org/1999/xhtml">
+    <h3>{{ object.title }}</h3>
+    <span class="badge badge-success"><a href="{% url 'home:post_list_user' object.author.username %}" style="color: white; ">{{ object.author }}</a></span></span>
+    <span class="badge badge-secondary">{{ object.created }}</span>
+    {% if request.user == object.author %}
+    <button type="button" class="btn btn-outline-secondary btn-sm" onClick="location.href='{% url 'multiphoto:multi_delete' object.pk %}'">Delete</button>
+    <button type="button" class="btn btn-outline-secondary btn-sm" onClick="location.href='{% url 'multiphoto:multi_update' object.pk %}'">Edit</button>
+    {% endif %}
+    <p></p>
+    <div>
+        <div id="post_{{ post.id }}" class="carousel slide container img-thumbnail" style="padding: 10px 20px;" data-ride="carousel">
+            <div class="carousel-inner">
+                {% for image in object.image_set.all %}
+                <div class="carousel-item {% if forloop.counter == 1 %} active {% endif %}">
+                    <img src="{{ image.file.url }}" class="card-img-top" alt="{{ image.file.image }}">
+                </div>
+                {% endfor %}
+            </div>
+            <a class="carousel-control-prev" href="#post_{{ post.id }}"
+               role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#post_{{ post.id }}"
+               role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+    <div style="padding-top: 20px; " />
+    <div class="caption">
+        <p>{{ object.content }}</p>
+        <br />
+        <button class="btn btn-outline-secondary btn-sm" onClick="location.href='{% url 'multiphoto:multi_like' object.pk %}'">
+            {% if request.user in object.like_users.all %}
+            <a href="{% url 'multiphoto:multi_like' object.pk %}">like<i class="fas fa-kiss-wink-heart"></i></a>
+            {% else %}
+            <a href="{% url 'multiphoto:multi_like' object.pk %}">like<i class="far fa-kiss-wink-heart"></i></a>
+            {% endif %}
+        </button>
+        <p>{{ object.like_users.count }}</p>
+    </div>
+</div>
+<div class="container">
+    <form method="POST" action="{% url 'multiphoto:comment_create' object.pk %}">{% csrf_token %}
+        <div class="form-group">
+            <label>Comments</label>
+            {{ multicomment_form | crispy }}
+            <button type="submit" class="btn btn-outline-primary btn-sm">Submit</button>
+        </div>
+    </form>
+</div>
+<br />
+<br />
+<div class="container">
+    <div id="comment-list" style="border: 1px solid #A4A4A4; margin-bottom: 20px; ">
+        {% for comment in object.multicomment_set.all %}
+        <div class="media mb-4" id="comment-id-{{ comment.pk }}">
+            <div class="media-body container">
+                <span class="badge badge-success"><a href="#" style="color: white;">{{ comment.author }}</a></span><span class="badge badge-secondary">{{ comment.modified_at }}</span>
+                <p>{{ comment.get_markdown_content | safe }}</p>
+                {% if request.user == comment.author %}
+                <span class="badge badge-pill badge-primary"><a style="color: white;" href="{% url 'multiphoto:comment_update' comment.pk %}">Modify</a></span>
+                <span class="badge badge-pill badge-primary"><a style="color: white;" href="{% url 'multiphoto:comment_delete' comment.pk %}">Delete</a></span>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

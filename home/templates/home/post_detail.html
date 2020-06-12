@@ -11,7 +11,7 @@
     <button type="button" class="btn btn-outline-secondary btn-sm" onClick="location.href='{{ object.get_post_update_url }}'">Edit</button>
     {% endif %}
     <p></p>
-    <img class="img-thumbnail" style="padding: 10px" src="{{ object.image.url }}" width="1000px" height="100%" alt="...">
+    <img class="img-thumbnail" style="padding: 10px" src="{{ object.image.url }}" width="950px" height="100%" alt="...">
     <div style="padding-top: 20px; " />
     <div class="caption">
         <p>{{ object.content }}</p>
@@ -42,8 +42,8 @@
                 <span class="badge badge-success"><a href="{% url 'home:post_list_user' comment.author %}" style="color: white;">{{ comment.author }}</a></span><span class="badge badge-secondary">{{ comment.modified_at }}</span>
                 <p>{{ comment.get_markdown_content | safe }}</p>
                 {% if request.user == comment.author %}
-                <span class="badge badge-pill badge-primary"><a style="color: white;" href="{% url 'home:comment_update' comment.pk %}">Modify</a></span>
-                <span class="badge badge-pill badge-primary"><a style="color: white;" href="{% url 'home:comment_delete' comment.pk %}">Delete</a></span>
+                <span class="badge badge-pill badge-primary"><a style="color: white;" href="{% url 'multiphoto:comment_update' comment.pk %}">Modify</a></span>
+                <span class="badge badge-pill badge-primary"><a style="color: white;" href="{% url 'multiphoto:comment_delete' comment.pk %}">Delete</a></span>
                 {% endif %}
             </div>
 

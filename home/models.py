@@ -12,6 +12,8 @@ from django.dispatch import receiver
 from markdown import markdown
 from markdownx.models import MarkdownxField
 
+from multiphoto.models import MultiPhoto
+
 
 class Category(models.Model):
     name = models.CharField(max_length=20)
@@ -79,3 +81,4 @@ class Comment(models.Model):
 
     def __str__(self):
         return '{}'.format(self.text)
+
