@@ -20,9 +20,13 @@
         </div>
         <div class="caption">
             <h4><a href="{% url 'multiphoto:multi_detail' p.pk %}" style="text-decoration: none;">{{ p.title }}</a></h4>
-            {% if p.like_users.count >= 1 %}
-            <p><i class="fas fa-splotch primary float-right">({{ p.like_users.count }})</i></p>
+            {% if p.multicomment_set.count >= 1 %}
+            <span class="badge badge-pill badge-light float-right"><p>({{ p.multicomment_set.count }})</p></span>{% endif %}
+
+            {% if p.lover.count >= 1 %}
+            <p><i class="fas fa-splotch primary float-right">({{ p.lover.count }})</i></p>
             {% endif %}
+
             <span class="badge badge-pill badge-secondary">author:</span>
             <span class="badge badge-success"><a href="{% url 'multiphoto:multi_list_user' p.author.username %}" style="color: white; ">{{ p.author }}</a></span>
             <p>{{ p.content | truncatewords:20 }}</p>
