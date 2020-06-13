@@ -35,7 +35,6 @@ class Image(models.Model):
     post = models.ForeignKey(MultiPhoto, on_delete=models.CASCADE)
     file = ProcessedImageField(
         upload_to='multi/images',  # 저장 위치
-        format='JPEG',  # 저장 포맷(확장자)
     )
 
 
