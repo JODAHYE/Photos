@@ -42,8 +42,8 @@
                 <span class="badge badge-success"><a href="{% url 'home:post_list_user' comment.author %}" style="color: white;">{{ comment.author }}</a></span><span class="badge badge-secondary">{{ comment.modified_at }}</span>
                 <p>{{ comment.get_markdown_content | safe }}</p>
                 {% if request.user == comment.author %}
-                <span class="badge badge-pill badge-primary"><a style="color: white;" href="{% url 'multiphoto:comment_update' comment.pk %}">Modify</a></span>
-                <span class="badge badge-pill badge-primary"><a style="color: white;" href="{% url 'multiphoto:comment_delete' comment.pk %}">Delete</a></span>
+                <span class="badge badge-pill badge-primary"><a style="color: white;" href="{% url 'home:comment_update' comment.pk %}">Modify</a></span>
+                <span class="badge badge-pill badge-primary"><a style="color: white;" href="{% url 'home:comment_delete' comment.pk %}">Delete</a></span>
                 {% endif %}
             </div>
 

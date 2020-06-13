@@ -35,7 +35,7 @@ urlpatterns = [
     path('comment_delete/<int:pk>/', views.comment_delete, name='comment_delete'),
     path('my_post/', MyMultiList.as_view(), name='my_multi_list'),
     path('my_comment/', MyMultiCommentList.as_view(), name='my_multi_comment_list'),
-    path('multi_like/<int:pk>/', views.multi_like, name="multi_like"),
+#    path('multi_like/<int:pk>/', views.multi_like, name="multi_like"),
     path('user_post/<str:username>/', MultiListByUser.as_view(), name='multi_list_user'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

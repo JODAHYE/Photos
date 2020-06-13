@@ -35,14 +35,7 @@
     <div class="caption">
         <p>{{ object.content }}</p>
         <br />
-        <button class="btn btn-outline-secondary btn-sm" onClick="location.href='{% url 'multiphoto:multi_like' object.pk %}'">
-            {% if request.user in object.like_users.all %}
-            <a href="{% url 'multiphoto:multi_like' object.pk %}">like<i class="fas fa-kiss-wink-heart"></i></a>
-            {% else %}
-            <a href="{% url 'multiphoto:multi_like' object.pk %}">like<i class="far fa-kiss-wink-heart"></i></a>
-            {% endif %}
-        </button>
-        <p>{{ object.like_users.count }}</p>
+        <br />
     </div>
 </div>
 <div class="container">

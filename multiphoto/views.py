@@ -8,6 +8,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.db import transaction
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView
 
+from home.models import Profile
 from multiphoto.forms import MultiForm, ImageFormSet, MultiCommentForm
 from multiphoto.models import MultiPhoto, MultiComment
 
@@ -37,7 +38,6 @@ def multi_create(request):
         if multi_form.is_valid() and image_formset.is_valid():
             post = multi_form.save(commit=False)
             post.author = request.user
-
             with transaction.atomic():
                 post.save()
                 image_formset.instance = post
@@ -154,20 +154,6 @@ class MyMultiCommentList(LoginRequiredMixin, ListView):
     def get_queryset(self):
         object_list = MultiComment.objects.filter(author=self.request.user)
         return object_list.order_by('-modified_at')
-
-
-def multi_like(request, pk):
-    post = MultiPhoto.objects.get(pk=pk)
-
-    if request.user.is_anonymous:
-        return render(request, 'home/login_require.html')
-
-    if request.user in post.like_users.all():
-        post.like_users.remove(request.user)
-    else:
-        post.like_users.add(request.user)
-
-    return redirect('multiphoto:multi_detail', pk)
 
 
 def multi_about(request):
