@@ -3,7 +3,7 @@
 {% block content %}
 <div class="thumbnail-detail" xmlns:blog="http://www.w3.org/1999/xhtml" xmlns:blog="http://www.w3.org/1999/xhtml">
     <h3>{{ object.title }}</h3>
-    <span class="badge badge-success"><a href="{% url 'home:post_list_user' object.author.username %}" style="color: white; ">{{ object.author }}</a></span></span>
+    <span class="badge badge-success"><a href="{% url 'multiphoto:multi_list_user' object.author.username %}" style="color: white; ">{{ object.author }}</a></span></span>
     <span class="badge badge-secondary">{{ object.created }}</span>
     {% if request.user == object.author %}
     <button type="button" class="btn btn-outline-secondary btn-sm" onClick="location.href='{% url 'multiphoto:multi_delete' object.pk %}'">Delete</button>
