@@ -1,9 +1,9 @@
 {% extends 'multiphoto/base.html' %}
 {% block content %}
-<div class="row container">
+<div class="row">
     {% if object_list %}
     {% for p in object_list %}
-    <div class="list col-md-7" style="margin: 0 auto;">
+    <div class="list col-md-7" style="margin:0 auto;">
         <div>
             <span class="badge badge-secondary">{{ p.created }}</span>
             <div class="row">
@@ -17,23 +17,23 @@
                 {% endif %}
                 {% endfor %}
             </div>
-        <div class="caption">
-            <h4><a href="{% url 'multiphoto:multi_detail' p.pk %}" style="text-decoration: none;">{{ p.title }}</a></h4>
-            {% if p.multicomment_set.count >= 1 %}
-            <span class="badge badge-pill badge-light float-right"><p>({{ p.multicomment_set.count }})</p></span>{% endif %}
+            <div class="caption">
+                <h4><a href="{% url 'multiphoto:multi_detail' p.pk %}" style="text-decoration: none;">{{ p.title }}</a></h4>
+                {% if p.multicomment_set.count >= 1 %}
+                <span class="badge badge-pill badge-light float-right"><p>({{ p.multicomment_set.count }})</p></span>{% endif %}
 
-            {% if p.lover.count >= 1 %}
-            <p><i class="fas fa-splotch primary float-right">({{ p.lover.count }})</i></p>
-            {% endif %}
+                {% if p.lover.count >= 1 %}
+                <p><i class="fas fa-splotch primary float-right">({{ p.lover.count }})</i></p>
+                {% endif %}
 
-            <span class="badge badge-pill badge-secondary">author:</span>
-            <span class="badge badge-success"><a href="{% url 'multiphoto:multi_list_user' p.author.username %}" style="color: white; ">{{ p.author }}</a></span>
-            <p>{{ p.content | truncatewords:20 }}</p>
-            <a href="{% url 'multiphoto:multi_detail' p.pk %}"><span class="label label-success">detail<i class="fas fa-angle-right"></i></span></a>
+                <span class="badge badge-pill badge-secondary">author:</span>
+                <span class="badge badge-success"><a href="{% url 'multiphoto:multi_list_user' p.author.username %}" style="color: white; ">{{ p.author }}</a></span>
+                <p>{{ p.content | truncatewords:20 }}</p>
+                <a href="{% url 'multiphoto:multi_detail' p.pk %}"><span class="label label-success">detail<i class="fas fa-angle-right"></i></span></a>
+            </div>
+            <hr width="200px;"/>
         </div>
-        <hr width="200px;"/>
-    </div>
-    <br/>
+        <br/>
     </div>
 </div>
 {% endfor %}
