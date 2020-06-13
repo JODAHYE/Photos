@@ -1,23 +1,22 @@
 {% extends 'multiphoto/base.html' %}
 {% block content %}
-<div class="row container" style="width: 100%">
+<div class="row container">
     {% if object_list %}
     {% for p in object_list %}
-    <div class="list col-md-6" style="margin: 0 auto;">
+    <div class="list col-md-7" style="margin: 0 auto;">
         <div>
             <span class="badge badge-secondary">{{ p.created }}</span>
             <div class="row">
                 {% for image in p.image_set.all %}
                 {% if forloop.counter <= 3 %}
-                <div class="col-4 img-thumbnail">
+                <div class="col-4 img-thumbnail" style="padding: 2px;">
                     <div>
-                        <img src={{ image.file.url }} width="100%" height="100%" alt="...">
+                        <img src={{ image.file.url }} style="max-width: 100%; height: auto;" alt="...">
                     </div>
                 </div>
                 {% endif %}
                 {% endfor %}
             </div>
-        </div>
         <div class="caption">
             <h4><a href="{% url 'multiphoto:multi_detail' p.pk %}" style="text-decoration: none;">{{ p.title }}</a></h4>
             {% if p.multicomment_set.count >= 1 %}
@@ -35,6 +34,7 @@
         <hr width="200px;"/>
     </div>
     <br/>
+    </div>
 </div>
 {% endfor %}
 {% else %}

@@ -7,7 +7,9 @@
         <span class="badge badge-secondary">{{ p.created }}</span>
         <div class="img-thumbnail" style="padding-left:8px; padding-right:8px;">
             <a href="{% url 'home:post_detail' p.pk %}">
-                <img src={{ p.image.url }} width="100%" height="100%" alt="...">
+                <div>
+                <img src={{ p.image.url }} style="max-width: 100%; height:auto; " alt="...">
+                </div>
             </a>
             <div class="caption">
                 <h4><a href="{% url 'home:post_detail' p.pk %}" style="text-decoration: none;">{{ p.title }}</a></h4> {% if p.comment_set.count >= 1 %}
