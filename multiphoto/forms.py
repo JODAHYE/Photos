@@ -21,4 +21,4 @@ class ImageForm(forms.ModelForm):
         fields = ['file',]
 
 
-ImageFormSet = forms.inlineformset_factory(MultiPhoto, Image, form=ImageForm, extra=6)
+ImageFormSet = forms.inlineformset_factory(MultiPhoto, Image, form=ImageForm, extra=5)
