@@ -1,13 +1,15 @@
 {% extends 'multiphoto/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <table>
-        {{ image_formset | crispy }}
-        {{ multi_form | crispy }}
-    </table>
-    <button type="submit" class="btn btn-primary btn-sm">Submit</button>
-</form>
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            {{ image_formset | crispy }}
+            {{ multi_form | crispy }}
+        </table>
+        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+    </form>
+</div>
 {{ form.media }}
 {% endblock %}
