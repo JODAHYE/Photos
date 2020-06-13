@@ -61,7 +61,7 @@
         {% for comment in object.multicomment_set.all %}
         <div class="media mb-4" id="comment-id-{{ comment.pk }}">
             <div class="media-body container">
-                <span class="badge badge-success"><a href="#" style="color: white;">{{ comment.author }}</a></span><span class="badge badge-secondary">{{ comment.modified_at }}</span>
+                <span class="badge badge-success"><a href="{% url 'multiphoto:multi_list_user' object.author.username %}" style="color: white;">{{ comment.author }}</a></span><span class="badge badge-secondary">{{ comment.modified_at }}</span>
                 <p>{{ comment.get_markdown_content | safe }}</p>
                 {% if request.user == comment.author %}
                 <span class="badge badge-pill badge-primary"><a style="color: white;" href="{% url 'multiphoto:comment_update' comment.pk %}">Modify</a></span>
