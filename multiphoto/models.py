@@ -22,6 +22,7 @@ class MultiPhoto(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=CASCADE)
     content = models.TextField()
+    lover = models.ManyToManyField(settings.AUTH_USER_MODEL, null=True, related_name='like_photos')
 
     def __str__(self):
         return '{}'.format(self.title)
