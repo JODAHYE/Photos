@@ -10,9 +10,11 @@
                 {% for image in p.image_set.all %}
                 {% if forloop.counter <= 3 %}
                 <div class="col-4 img-thumbnail" style="padding: 2px;">
-                    <div>
-                        <img src={{ image.file.url }} style="max-width: 100%; height: auto;" alt="...">
-                    </div>
+                    <a href="{% url 'multiphoto:multi_detail' p.pk %}">
+                        <div>
+                            <img src={{ image.file.url }} style="max-width: 100%; height: auto;" alt="...">
+                        </div>
+                    </a>
                 </div>
                 {% endif %}
                 {% endfor %}

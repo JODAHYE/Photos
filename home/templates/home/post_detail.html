@@ -1,7 +1,7 @@
 {% extends 'home/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="thumbnail-detail" xmlns:blog="http://www.w3.org/1999/xhtml" xmlns:blog="http://www.w3.org/1999/xhtml">
+<div class="thumbnail-detail container" xmlns:blog="http://www.w3.org/1999/xhtml" xmlns:blog="http://www.w3.org/1999/xhtml">
     <h3>{{ object.title }}</h3>
     <span class="badge badge-success"><a href="{% url 'home:post_list_user' object.author.username %}" style="color: white; ">{{ object.author }}</a></span></span>
     <span class="badge badge-secondary">{{ object.created }}</span>
