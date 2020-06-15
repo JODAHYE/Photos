@@ -7,8 +7,8 @@
     <span class="badge badge-secondary">{{ object.created }}</span>
     <span class="badge badge-secondary">{{ object.category }}</span>
     {% if request.user == object.author %}
-    <button type="button" class="btn btn-outline-secondary btn-sm" onClick="location.href='{% url 'home:post_delete' object.pk %}'">Delete</button>
     <button type="button" class="btn btn-outline-secondary btn-sm" onClick="location.href='{{ object.get_post_update_url }}'">Edit</button>
+    <button type="button" class="btn btn-outline-secondary btn-sm" onClick="location.href='{% url 'home:post_delete' object.pk %}'">Delete</button>
     {% endif %}
     <div>
     <img class="img-thumbnail" style="padding: 10px" src="{{ object.image.url }}" style="max-width:100%; height: auto;" alt="...">

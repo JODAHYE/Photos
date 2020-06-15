@@ -6,8 +6,8 @@
     <span class="badge badge-success"><a href="{% url 'multiphoto:multi_list_user' object.author.username %}" style="color: white; ">{{ object.author }}</a></span></span>
     <span class="badge badge-secondary">{{ object.created }}</span>
     {% if request.user == object.author %}
-    <button type="button" class="btn btn-outline-secondary btn-sm" onClick="location.href='{% url 'multiphoto:multi_delete' object.pk %}'">Delete</button>
     <button type="button" class="btn btn-outline-secondary btn-sm" onClick="location.href='{% url 'multiphoto:multi_update' object.pk %}'">Edit</button>
+    <button type="button" class="btn btn-outline-secondary btn-sm" onClick="location.href='{% url 'multiphoto:multi_delete' object.pk %}'">Delete</button>
     {% endif %}
     <p></p>
     <div>
