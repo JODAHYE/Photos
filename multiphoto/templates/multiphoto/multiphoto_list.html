@@ -4,8 +4,9 @@
     {% if object_list %}
     {% for p in object_list %}
     <div class="list col-md-7" style="margin:0 auto;">
-        <div>
+        <div styele="overflow: hidden;">
             <span class="badge badge-secondary">{{ p.created }}</span>
+            <span class="badge badge-secondary" style="float: right;"><i class="fas fa-images"></i>{{ p.image_set.count }}</span>
             <div class="row">
                 {% for image in p.image_set.all %}
                 {% if forloop.counter <= 3 %}
